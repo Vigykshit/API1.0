@@ -4,53 +4,57 @@
 PAGE 1:-
 ALL CATEGORY
 
-http://localhost:9120/category
+https://amazonapi-mjkr.onrender.com/category
+
 
 PAGE 2:-
 ALL CATEGORY ITEM'S
 
-http://localhost:9120/item
+https://amazonapi-mjkr.onrender.com/item
 
 ITEMS BY CATEGORY
 
-http://localhost:9120/item?categoryId=
+https://amazonapi-mjkr.onrender.com/item?categoryId=
 
 CATEGORY+FILTER
 
-http://localhost:9120/filter/1?filterId=12
+https://amazonapi-mjkr.onrender.com/filter/1?filterId=12
 
 CATEGORY+COST
 
-http://localhost:9120/filter/1?lPrice=300&hPrice=3000
+https://amazonapi-mjkr.onrender.com/filter/1?lPrice=300&hPrice=3000
+
 
 PAGE 3:-
 ALL ITEM'S DETAIL
 
-http://localhost:9120/itemdetail
+https://amazonapi-mjkr.onrender.com/itemdetail
 
 ITEM DETAIL
 
-http://localhost:9120/itemdetail?productId=3
+https://amazonapi-mjkr.onrender.com/itemdetail?productId=3
 
 MENU
 
-http://localhost:9120/menu/1
+https://amazonapi-mjkr.onrender.com/menu/1
+
 
 PAGE 4:-
 DETAILS OF MENU SELECTED
 
 PLACEORDER
-http://localhost:9120/placeorder
+https://amazonapi-mjkr.onrender.com/placeorder
+
 
 PAGE 5:-
 List of all the orders
 
-http://localhost:9120/orders
+https://amazonapi-mjkr.onrender.com/orders
 
 UPDATE ORDER DETAILS
 
-http://localhost:9120/updateOrder 
+https://amazonapi-mjkr.onrender.com/updateOrder 
 
 DELETE ORDERS
 
-http://localhost:9120/deleteOrder 
+https://amazonapi-mjkr.onrender.com/deleteOrder 
