@@ -68,13 +68,25 @@ app.get('/filter/:categoryId' , async(req,res)=>{
     res.send(output)
 })
 
-app.get('/itemdetail/:id', async(req,res) => {
-    let id = new Mongo.ObjectId(req.params.id)
-    let query = {_id:id}
-    let collection = "itemdetail";
-    let output = await getData(collection,query);
-    res.send(output)
-})
+// app.get('/itemdetail/:id', async(req,res) => {
+//     let id = new Mongo.ObjectId(req.params.id)
+//     let query = {_id:id}
+//     let collection = "itemdetail";
+//     let output = await getData(collection,query);
+//     res.send(output)
+// })
+// app.get('/itemdetail',async (req,res)=>{
+//     let query ={};
+//     if(req.query._id ){
+//         query={_id:Number(req.query._id)}
+//     }
+//     else{
+//         query={}
+//     }
+//     let collection = "itemdetail";
+//     let output = await getData(collection,query);
+//     res.send(output)
+// })
 // app.get('/item/:id', async(req,res) => {
 //     let id = Number(req.params.id)
 //     let query = {category_id:id}
@@ -97,13 +109,13 @@ app.get('/itemdetail',async (req,res)=>{
 })
 
 
-// app.get('/itemdetail/:id', async(req,res) => {
-//     let id = Number(req.params.id)
-//     let query = {product_id:id}
-//     let collection = "itemdetail";
-//     let output = await getData(collection,query);
-//     res.send(output)
-// })
+app.get('/itemdetail/:id', async(req,res) => {
+    let id = Number(req.params.id)
+    let query = {product_id:id}
+    let collection = "itemdetail";
+    let output = await getData(collection,query);
+    res.send(output)
+})
 // app.get('/itemdetail',async (req,res)=>{
 //     let query ={};
 //     if(req.query.productId  ){
