@@ -6,20 +6,28 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 let {dbConnect,getData,postData,updateOrder,deleteOrder} = require('./Controller/dbControler')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(cors())
+
+
 
 app.get('/',(req,res)=>{
     res.send('we are using amazonapi')
 })
 
-app.get('/category',async (req,res)=>{
-    let query ={};
-    let collection = "category"
-    let output = await getData(collection,query)
-    res.send(output)
-})
+// app.get('/category',async (req,res)=>{
+//     let query ={};
+//     let collection = "category"
+//     let output = await getData(collection,query)
+//     res.send(output)
+// })
+
+// app.get('/category/:id', async(req,res) => {
+//     let id = Number(req.params.id)
+//     let query = {category_id:id}
+//     let collection = "item";
+//     let output = await getData(collection,query);
+//     res.send(output)
+// })
+
 
 
 app.get('/item',async (req,res)=>{
@@ -31,7 +39,7 @@ app.get('/item',async (req,res)=>{
         query={category_id:Number(req.query.categoryId)}
     }
     else if(req.query.productId){
-        query={product_id:Number(req.query.filterId)}
+        query={product_id:Number(req.query.productId)}
     }
     else{
         query={}
@@ -41,25 +49,60 @@ app.get('/item',async (req,res)=>{
     res.send(output)
 })
 
+// app.get('/categoryId/:id', async(req,res) => {
+//     let id = Number(req.params.product_id)
+//     let query = {product_id:id}
+//     let collection = "item";
+//     let output = await getData(collection,query);
+//     res.send(output)
+// })
+
+//filter api
+app.get('/category', async (req,res) => {
+    let query = {};
+    let collection = "category";
+    let output = await getData(collection,query);
+    res.send(output)
+})
+
+app.get('/item',async (req,res)=>{
+    let query ={};
+    if(req.query.categoryId && req.query.filterId ){
+        query={category_id: Number(req.query.categoryId),"Filters.Filter_id": Number(req.query.filterId)}
+    }
+    else if(req.query.categoryId){
+        query={category_id: Number(req.query.categoryId)}
+    }
+    else if(req.query.filterId){
+        query={"Filters.Filter_id": Number(req.query.filterId)}
+    }
+    
+    else{
+        query={}
+    }
+    let collection = "item"
+    let output = await getData(collection,query)
+    res.send(output)
+})
 
 app.get('/filter/:categoryId' , async(req,res)=>{
-   let categoryId=Number(req.params.categoryId);
+   let categoryId= Number(req.params.categoryId);
    let filterId = Number(req.query.filterId)
-   let lPrice= Number(req.query.lPrice)
-   let hPrice = Number(req.query.hPrice)
+   let lcost= Number(req.query.lcost)
+   let hcost = Number(req.query.hcost)
    if (filterId){
     query ={
-        category_id  : categoryId,
+        category_id: categoryId,
         "Filters.Filter_id": filterId
     }
    }
 
-       else if(lPrice && hPrice){
-        query = {
-                  category_id:categoryId,
-            $and:[{Price:{$gte:hPrice,$lte:lPrice},}]
-        }
-       }
+   else if(lcost && hcost){
+    query = {
+        category_id: categoryId,
+        $and:[{cost:{$gt:lcost,$lt:hcost}}]
+    }
+}
        else{
         query={}
        }
@@ -109,13 +152,7 @@ app.get('/itemdetail',async (req,res)=>{
 })
 
 
-app.get('/itemdetail/:id', async(req,res) => {
-    let id = Number(req.params.id)
-    let query = {product_id:id}
-    let collection = "itemdetail";
-    let output = await getData(collection,query);
-    res.send(output)
-})
+
 // app.get('/itemdetail',async (req,res)=>{
 //     let query ={};
 //     if(req.query.productId  ){
@@ -134,7 +171,7 @@ app.get('/menu',async (req,res)=>{
 })
 app.get('/menu/:id',async(req,res) => {
 let id = Number(req.params.id)
-let query ={category_id:id}
+let query ={menu_id:id}
 let collection ='menu';
 let output =await getData(collection,query)
 res.send(output)
@@ -189,33 +226,8 @@ app.delete('/deleteOrder',async(req,res) => {
     res.send(output)
 })
 
-app.get('/user',async(req,res) => {
-    let query = {};
-    if(req.query.email){
-        query={email:req.query.email}
-    }else{
-        query = {}
-    }
-   
-    let collection = "register";
-    let output = await getData(collection,query);
-    res.send(output)
-})
 
-app.post('/register',async(req,res) => {
-    let data = req.body;
-    let collection = "register";
-    console.log(">>>",data)
-    let response = await postData(collection,data)
-    res.send(response)
-})
-app.post('/login',async(req,res) => {
-    let data = req.body;
-    let collection = "register";
-    console.log(">>>",data)
-    let response = await postData(collection,data)
-    res.send(response)
-})
+
 
 app.listen(port,(err)=>{
     dbConnect()

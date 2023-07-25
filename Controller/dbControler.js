@@ -1,4 +1,4 @@
-let mongo = require('mongodb');
+// let mongo = require('mongodb');
 let {MongoClient} = require('mongodb');
 let mongoUrl= "mongodb+srv://projectAmazon:qYlDdRXfhoDkFlSA@cluster1amazon.f7agszm.mongodb.net/?retryWrites=true&w=majority";
 let client = new MongoClient(mongoUrl)
@@ -53,6 +53,24 @@ async function deleteOrder(colName,condition){
     }
     return output
 }
+// async function register(colName,condition){
+//     let output;
+//     try{
+//         output = await db.collection(colName).updateOne(condition,data)
+//     } catch(err){
+//         output = {"response":"Error in update data"}
+//     }
+//     return output
+// }
+// async function login(colName,condition){
+//     let output;
+//     try{
+//         output = await db.collection(colName).updateOne(condition,data)
+//     } catch(err){
+//         output = {"response":"Error in update data"}
+//     }
+//     return output
+// }
 
 
 module.exports = {
@@ -60,5 +78,5 @@ module.exports = {
     getData,
     postData,
     updateOrder,
-    deleteOrder
+    deleteOrder,
 }
