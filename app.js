@@ -13,12 +13,12 @@ app.get('/',(req,res)=>{
     res.send('we are using amazonapi')
 })
 
-// app.get('/category',async (req,res)=>{
-//     let query ={};
-//     let collection = "category"
-//     let output = await getData(collection,query)
-//     res.send(output)
-// })
+app.get('/category',async (req,res)=>{
+    let query ={};
+    let collection = "category"
+    let output = await getData(collection,query)
+    res.send(output)
+})
 
 // app.get('/category/:id', async(req,res) => {
 //     let id = Number(req.params.id)
@@ -49,21 +49,21 @@ app.get('/item',async (req,res)=>{
     res.send(output)
 })
 
-app.get('/categoryId/:id', async(req,res) => {
-    let id = Number(req.params.product_id)
-    let query = {product_id:id}
-    let collection = "item";
-    let output = await getData(collection,query);
-    res.send(output)
-})
+// app.get('/categoryId/:id', async(req,res) => {
+//     let id = Number(req.params.product_id)
+//     let query = {product_id:id}
+//     let collection = "item";
+//     let output = await getData(collection,query);
+//     res.send(output)
+// })
 
 //filter api
-app.get('/category', async (req,res) => {
-    let query = {};
-    let collection = "category";
-    let output = await getData(collection,query);
-    res.send(output)
-})
+// app.get('/category', async (req,res) => {
+//     let query = {};
+//     let collection = "category";
+//     let output = await getData(collection,query);
+//     res.send(output)
+// })
 
 app.get('/item',async (req,res)=>{
     let query ={};
