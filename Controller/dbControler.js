@@ -1,4 +1,4 @@
-// let mongo = require('mongodb');
+let mongo = require('mongodb');
 let {MongoClient} = require('mongodb');
 let mongoUrl= "mongodb+srv://projectAmazon:qYlDdRXfhoDkFlSA@cluster1amazon.f7agszm.mongodb.net/?retryWrites=true&w=majority";
 let client = new MongoClient(mongoUrl)

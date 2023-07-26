@@ -49,7 +49,7 @@ https://amazonapi-mjkr.onrender.com/placeorder
 PAGE 5:-
 List of all the orders
 
-https://amazonapi-mjkr.onrender.com/orders
+https://amazonapi-mjkr.onrender.com/itemdetail?productId=3
 
 UPDATE ORDER DETAILS
 
