@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 let {dbConnect,getData,postData,updateOrder,deleteOrder} = require('./Controller/dbControler')
 
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(cors())
 
 
 app.get('/',(req,res)=>{
