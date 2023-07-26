@@ -20,13 +20,13 @@ app.get('/category',async (req,res)=>{
     res.send(output)
 })
 
-// app.get('/category/:id', async(req,res) => {
-//     let id = Number(req.params.id)
-//     let query = {category_id:id}
-//     let collection = "item";
-//     let output = await getData(collection,query);
-//     res.send(output)
-// })
+app.get('/category/:id', async(req,res) => {
+    let id = Number(req.params.id)
+    let query = {category_id:id}
+    let collection = "item";
+    let output = await getData(collection,query);
+    res.send(output)
+})
 
 
 
