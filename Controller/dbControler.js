@@ -53,15 +53,16 @@ async function deleteOrder(colName,condition){
     }
     return output
 }
-// async function register(colName,condition){
-//     let output;
-//     try{
-//         output = await db.collection(colName).updateOne(condition,data)
-//     } catch(err){
-//         output = {"response":"Error in update data"}
-//     }
-//     return output
-// }
+async function register(colName,data){
+    let output;
+    try{
+        output = await db.collection(colName).insertOne(data)
+    }
+    catch(err){
+        output = {"response":"Error in postData"}
+    }
+    return output
+}
 // async function login(colName,condition){
 //     let output;
 //     try{
@@ -79,4 +80,5 @@ module.exports = {
     postData,
     updateOrder,
     deleteOrder,
+    register
 }

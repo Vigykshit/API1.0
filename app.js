@@ -245,6 +245,27 @@ app.delete('/deleteOrder',async(req,res) => {
 })
 
 
+// register
+app.get('/user',async(req,res) => {
+    let query = {};
+    if(req.query.email){
+        query={email:req.query.email}
+    }else{
+        query = {}
+    }
+   
+    let collection = "register";
+    let output = await getData(collection,query);
+    res.send(output)
+})
+
+app.post('/register',async(req,res) => {
+    let data = req.body;
+    let collection = "register";
+    console.log(">>>",data)
+    let response = await postData(collection,data)
+    res.send(response)
+})
 
 
 app.listen(port,(err)=>{
