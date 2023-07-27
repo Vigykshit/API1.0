@@ -94,6 +94,7 @@ app.get('/addon/:categoryId' , async(req,res) => {
    let lcost = Number(req.query.lcost);
    let hcost = Number(req.query.hcost);
    let brandId = Number(req.query.brandId);
+   let arrivalId = Number(req.query.arrivalId);
    if (filterId){
     query = {
         category_id :categoryId,
@@ -112,6 +113,12 @@ app.get('/addon/:categoryId' , async(req,res) => {
     query = {
          category_id: categoryId,
          "Brand.Brand_id" : brandId
+    }
+}
+   else if(arrivalId){
+    query = {
+         category_id: categoryId,
+         "New.New_id" :arrivalId
     }
 }
        else{
