@@ -22,38 +22,38 @@ app.get('/category',async (req,res)=>{
     res.send(output)
 })
 
-app.get('/category/:id', async(req,res) => {
-    let id = Number(req.params.id)
-    let query = {category_id:id}
-    let collection = "item";
-    let output = await getData(collection,query);
-    res.send(output)
-})
+// app.get('/category/:id', async(req,res) => {
+//     let id = Number(req.params.id)
+//     let query = {category_id:id}
+//     let collection = "item";
+//     let output = await getData(collection,query);
+//     res.send(output)
+// })
 
 
 
-app.get('/item',async (req,res)=>{
-    let query ={};
-    if(req.query.categoryId && req.query.productId ){
-        query={category_id:Number(req.query.categoryId),"product_id":Number(req.query.productId)}
-    }
-    else if(req.query.categoryId  ){
-        query={category_id:Number(req.query.categoryId)}
-    }
-    else if(req.query.productId){
-        query={product_id:Number(req.query.productId)}
-    }
-    else{
-        query={}
-    }
-    let collection = "item"
-    let output = await getData(collection,query)
-    res.send(output)
-})
+// app.get('/item',async (req,res)=>{
+//     let query ={};
+//     if(req.query.categoryId && req.query.productId ){
+//         query={category_id:Number(req.query.categoryId),"product_id":Number(req.query.productId)}
+//     }
+//     else if(req.query.categoryId  ){
+//         query={category_id:Number(req.query.categoryId)}
+//     }
+//     else if(req.query.productId){
+//         query={product_id:Number(req.query.productId)}
+//     }
+//     else{
+//         query={}
+//     }
+//     let collection = "item"
+//     let output = await getData(collection,query)
+//     res.send(output)
+// })
 
-// app.get('/categoryId/:id', async(req,res) => {
-//     let id = Number(req.params.product_id)
-//     let query = {product_id:id}
+// app.get('/filter/:id', async(req,res) => {
+//     let id= Number(req.params.category_id)
+//     let query = {category_id:id}
 //     let collection = "item";
 //     let output = await getData(collection,query);
 //     res.send(output)
@@ -72,7 +72,7 @@ app.get('/item',async (req,res)=>{
     if(req.query.categoryId && req.query.filterId ){
         query={category_id: Number(req.query.categoryId),"Filters.Filter_id": Number(req.query.filterId)}
     }
-    else if(req.query.categoryId){
+    if(req.query.categoryId){
         query={category_id: Number(req.query.categoryId)}
     }
     else if(req.query.filterId){
@@ -87,26 +87,27 @@ app.get('/item',async (req,res)=>{
     res.send(output)
 })
 
-app.get('/filter/:categoryId' , async(req,res)=>{
-   let categoryId= Number(req.params.categoryId);
-   let filterId = Number(req.query.filterId)
-   let lcost= Number(req.query.lcost)
-   let hcost = Number(req.query.hcost)
+app.get('/addon/:categoryId' , async(req,res) => {
+   let categoryId = Number(req.params.categoryId);
+ 
+   let filterId = Number(req.query.filterId);
+   let lcost = Number(req.query.lcost);
+   let hcost = Number(req.query.hcost);
    if (filterId){
-    query ={
-        category_id: categoryId,
-        "Filters.Filter_id": filterId
+    query = {
+        category_id :categoryId,
+        "Filters.Filter_id" :filterId
     }
    }
 
    else if(lcost && hcost){
     query = {
         category_id: categoryId,
-        $and:[{cost:{$gt:lcost,$lt:hcost}}]
+        $and:[{cost:{$gte:lcost,$lte:hcost}}]
     }
 }
        else{
-        query={}
+        query = {}
        }
     let collection = "item";
     let output = await getData(collection,query)
