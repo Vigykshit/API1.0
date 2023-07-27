@@ -93,6 +93,7 @@ app.get('/addon/:categoryId' , async(req,res) => {
    let filterId = Number(req.query.filterId);
    let lcost = Number(req.query.lcost);
    let hcost = Number(req.query.hcost);
+   let brandId = Number(req.query.brandId);
    if (filterId){
     query = {
         category_id :categoryId,
@@ -104,6 +105,13 @@ app.get('/addon/:categoryId' , async(req,res) => {
     query = {
         category_id: categoryId,
         $and:[{cost:{$gte:lcost,$lte:hcost}}]
+    }
+}
+
+   else if(brandId){
+    query = {
+         category_id: categoryId,
+         "Brand.Brand_id" : brandId
     }
 }
        else{
